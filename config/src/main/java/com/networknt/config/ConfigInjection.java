@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016 Network New Technologies Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.networknt.config;
 
 import java.util.ArrayList;
@@ -50,12 +66,8 @@ public class ConfigInjection {
         while (m.find()) {
             // Get parsing result
             Object value = getValue(m.group(1));
-            // Throw exception when no parsing result found
-            if (value == null) {
-                throw new ConfigException(
-                        "\"${" + m.group(1) + "}\" appears in config file cannot be expanded");
-                // Return directly when the parsing result don't need to be casted to String
-            } else if (!(value instanceof String)) {
+            // Return directly when the parsing result don't need to be casted to String
+            if (!(value instanceof String)) {
                 return value;
             }
             m.appendReplacement(sb, (String) value);
@@ -96,6 +108,10 @@ public class ConfigInjection {
                         throw new ConfigException(error_text);
                     }
                 }
+            }
+            // Throw exception when no parsing result found
+            if (value == null && valueMap != null && !valueMap.containsKey(injectionPattern.getKey())) {
+                throw new ConfigException("\"${" + content + "}\" appears in config file cannot be expanded");
             }
         }
         return value;
