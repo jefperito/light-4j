@@ -2,7 +2,7 @@
  * Copyright (c) 2016 Network New Technologies Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
@@ -68,7 +68,7 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({AuditConfig.class, LoggerFactory.class})
-@PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "org.apache.log4j.*"})
+@PowerMockIgnore({"javax.*", "org.xml.sax.*", "org.apache.log4j.*"})
 public class AuditHandlerTest {
     static Logger logger = LoggerFactory.getLogger(AuditHandlerTest.class);
 
@@ -336,7 +336,7 @@ public class AuditHandlerTest {
         Mockito.verify(objectMapper).writeValueAsString(Mockito.any());
     }
 
-    private class ArgumentMatcherAuditInfo implements ArgumentMatcher<AttachmentKey<Map>> {
+    private static class ArgumentMatcherAuditInfo implements ArgumentMatcher<AttachmentKey<Map>> {
 
         @Override
         public boolean matches(AttachmentKey<Map> attachmentKey) {
@@ -347,7 +347,7 @@ public class AuditHandlerTest {
         }
     }
 
-    private class ArgumentMatcherChainId implements ArgumentMatcher<AttachmentKey<String>> {
+    private static class ArgumentMatcherChainId implements ArgumentMatcher<AttachmentKey<String>> {
 
         @Override
         public boolean matches(AttachmentKey<String> attachmentKey) {
@@ -358,7 +358,7 @@ public class AuditHandlerTest {
         }
     }
 
-    private class ArgumentMatcherChainSeq implements ArgumentMatcher<AttachmentKey<Integer>> {
+    private static class ArgumentMatcherChainSeq implements ArgumentMatcher<AttachmentKey<Integer>> {
 
         @Override
         public boolean matches(AttachmentKey<Integer> attachmentKey) {

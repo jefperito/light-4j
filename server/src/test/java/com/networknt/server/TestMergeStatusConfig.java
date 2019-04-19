@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2016 Network New Technologies Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.networknt.server;
 
 import com.networknt.config.Config;
@@ -43,7 +58,6 @@ public class TestMergeStatusConfig extends TestCase {
         appStatus.delete();
     }
 
-    @Test
     public void testAppStatus() {
         config.clear();
         // test default element without merging with app-status
@@ -57,7 +71,6 @@ public class TestMergeStatusConfig extends TestCase {
         Assert.assertEquals(401, status1.getStatusCode());
     }
 
-    @Test
     public void testDuplicateStatus() {
         config.clear();
         try {
@@ -70,7 +83,6 @@ public class TestMergeStatusConfig extends TestCase {
         }
     }
 
-    @Test
     public void testWithoutAppStatus() {
         config.clear();
         File appStatus = new File(homeDir + "/app-status.yml");
@@ -84,7 +96,6 @@ public class TestMergeStatusConfig extends TestCase {
         Assert.assertEquals(401, status1.getStatusCode());
     }
 
-    @Test
     public void testEmptyAppStatus() {
         config.clear();
         File appStatus = new File(homeDir + "/app-status.yml");
